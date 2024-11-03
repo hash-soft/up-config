@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>キー設定</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+
+  <body>
+    <main class="w-full flex-grow">
+      <div class="bg-gray-200">
+        <nav class="flex flex-col sm:flex-row">
+          <button
+            name="tab-text"
+            class="text-gray-600 py-1 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
+          >
+            キーボード
+          </button>
+          <button
+            name="tab-text"
+            class="text-gray-600 py-1 px-6 block hover:text-blue-500 focus:outline-none"
+          />
+          ゲームパッド
+        </nav>
+      </div>
+      <div class="bg-white p-2">
+        <div id="" name="tab-content" class="block">
+          <table class="w-full text-md bg-white shadow-md rounded mb-4">
+            <tbody>
+              <tr class="border-b">
+                <th class="text-left p-3 px-5 w-[250px]">操作</th>
+                <th class="text-left p-3 px-5">キー</th>
+                <th class="text-left p-3 px-5"></th>
+                <th></th>
+              </tr>
+              <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                <td class="p-3 px-5">メニュー/決定</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md">
+                    <li
+                      class="px-2 bg-white border-b last:border-none border-gray-200"
+                    >
+                      Enter
+                    </li>
+                    <li
+                      class="px-2 bg-white border-b last:border-none border-gray-200"
+                    >
+                      L
+                    </li>
+                  </ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">閉じる/キャンセル</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">マルチ/決定</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                <td class="p-3 px-5">すべて閉じる/キャンセル</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">上</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                <td class="p-3 px-5">右</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">下</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100 bg-red-200">
+                <td class="p-3 px-5">左</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="" name="tab-content" class="hidden">
+          <table class="w-full text-md bg-white shadow-md rounded mb-4">
+            <tbody>
+              <tr class="border-b">
+                <th class="text-left p-3 px-5 w-[250px]">操作</th>
+                <th class="text-left p-3 px-5">キー</th>
+                <th class="text-left p-3 px-5"></th>
+                <th></th>
+              </tr>
+              <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                <td class="p-3 px-5">メニュー/決定</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">閉じる/キャンセル</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">マルチ/決定</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                <td class="p-3 px-5">すべて閉じる/キャンセル</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">アナログキー</td>
+                <td class="p-3 px-5"></td>
+                <td class="p-3 px-5"></td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">上</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                <td class="p-3 px-5">右</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">下</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-orange-100 bg-red-200">
+                <td class="p-3 px-5">左</td>
+                <td class="p-3 px-5">
+                  <ul class="shadow-md"></ul>
+                </td>
+                <td class="p-3 px-5">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      削除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
