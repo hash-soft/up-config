@@ -48,10 +48,10 @@ export class TabSwitcher {
 
   /**
    * タブ切替時の処理
-   * @param e
+   * @param _e
    * @param index
    */
-  private _onTabSwitch(e: Event, index: number) {
+  private _onTabSwitch(_e: Event, index: number) {
     this._tabTexts[this._currentIndex].classList.remove(
       "text-blue-500",
       "border-b-2",

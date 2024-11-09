@@ -19,21 +19,26 @@ export class TableSelector {
    * 行の要素
    */
   private _tableRows!: NodeListOf<HTMLElement>;
+  /**
+   * キーデータ
+   */
+  private _data!: KeyMap;
+
+  get data(): Readonly<KeyMap> {
+    return this._data;
+  }
 
   /**
    * コンストラクタ
    * @param _prefixName
-   * @param _data
    */
-  constructor(
-    private _prefixName: string,
-    private _data: KeyMap
-  ) {}
+  constructor(private _prefixName: string) {}
 
   /**
    * 使用準備
    */
-  setup() {
+  setup(data: Readonly<KeyMap>) {
+    this._data = [...data];
     this._tableRows = document.getElementsByName(this._prefixName + "-row");
     this._tableRows.forEach((row, index) => {
       row.addEventListener("click", (event) => {
@@ -155,10 +160,10 @@ export class TableSelector {
 
   /**
    * 行クリック時の処理
-   * @param e
+   * @param _e
    * @param index
    */
-  private _onTableRowClick(e: Event, index: number) {
+  private _onTableRowClick(_e: Event, index: number) {
     // observer誤判定防止のためremove ⇒ add の順に実行する
     this._tableRows[this._currentIndex].classList.remove(
       "bg-yellow-300",
@@ -175,10 +180,10 @@ export class TableSelector {
 
   /**
    * キー削除クリック時の処理
-   * @param e
+   * @param _e
    * @param point
    */
-  private _onClickKeyRemove(e: Event, point: RemovePoint) {
+  private _onClickKeyRemove(_e: Event, point: RemovePoint) {
     // データを検索
     // なければなにもしない
     // あればデータから削除して_resetRowKeyを実行
@@ -193,10 +198,10 @@ export class TableSelector {
 
   /**
    * キー全削除クリック時の処理
-   * @param e
+   * @param _e
    * @param index
    */
-  private _onClickRowRemove(e: Event, index: number) {
+  private _onClickRowRemove(_e: Event, index: number) {
     // index行を全て削除して_resetTableを実行
     this._data[index].splice(0);
     this._resetRowKey(

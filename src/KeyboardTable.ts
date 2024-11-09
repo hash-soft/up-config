@@ -3,7 +3,6 @@
  */
 
 import { TableSelector } from "./TableSelector";
-import { KeyMap } from "./UsaConfig";
 
 export class KeyboardTable extends TableSelector {
   /**
@@ -13,10 +12,9 @@ export class KeyboardTable extends TableSelector {
 
   /**
    * コンストラクタ
-   * @param data
    */
-  constructor(data: KeyMap) {
-    super("keyboard", data);
+  constructor() {
+    super("keyboard");
   }
 
   /**
@@ -41,9 +39,26 @@ export class KeyboardTable extends TableSelector {
    * @param e
    */
   private _onKeyDown(e: KeyboardEvent) {
-    // 割り当て不可なキーを無効化
-    if (["Backspace", "Tab"].includes(e.code)) {
-      e.preventDefault();
+    // 割り当て不可なキーな場合追加不可
+    if (
+      [
+        "Backspace",
+        "Tab",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12",
+      ].includes(e.code)
+    ) {
+      return;
     }
     this._pushData(e.code);
   }
