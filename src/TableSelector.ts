@@ -32,7 +32,14 @@ export class TableSelector {
    * コンストラクタ
    * @param _prefixName
    */
-  constructor(private _prefixName: string) {}
+  constructor(
+    private _prefixName: string,
+    private _style = {
+      bg: "bg-yellow-300",
+      hover: "hover:bg-yellow-100",
+      activeHover: "hover:bg-yellow-300",
+    }
+  ) {}
 
   /**
    * 使用準備
@@ -72,6 +79,9 @@ export class TableSelector {
   protected _resetRowKey(ulTag: HTMLElement, index: number) {
     while (ulTag.firstChild) {
       ulTag.removeChild(ulTag.firstChild);
+    }
+    if (!this._data[index]) {
+      return;
     }
     for (const key of this._data[index]) {
       this._pushRowKey(ulTag, key, index);
@@ -139,7 +149,7 @@ export class TableSelector {
     removePoints[this._currentIndex] = -1;
     removePoints.forEach((point, index) => {
       if (point !== -1) {
-        this._data[index].splice(point, 1);
+        this._data[index]?.splice(point, 1);
       }
     });
     this._data[this._currentIndex].push(key);
@@ -166,14 +176,13 @@ export class TableSelector {
   private _onTableRowClick(_e: Event, index: number) {
     // observer誤判定防止のためremove ⇒ add の順に実行する
     this._tableRows[this._currentIndex].classList.remove(
-      "bg-yellow-300",
-      "hover:bg-yellow-300"
+      this._style.bg,
+      this._style.activeHover
     );
-    this._tableRows[this._currentIndex].classList.add("hover:bg-yellow-100");
-    this._tableRows[index].classList.remove("bg-yellow-100");
+    this._tableRows[this._currentIndex].classList.add(this._style.hover);
     this._tableRows[index].classList.add(
-      "bg-yellow-300",
-      "hover:bg-yellow-300"
+      this._style.bg,
+      this._style.activeHover
     );
     this._currentIndex = index;
   }
@@ -203,7 +212,7 @@ export class TableSelector {
    */
   private _onClickRowRemove(_e: Event, index: number) {
     // index行を全て削除して_resetTableを実行
-    this._data[index].splice(0);
+    this._data[index]?.splice(0);
     this._resetRowKey(
       this._tableRows[index].getElementsByTagName("ul")[0],
       index

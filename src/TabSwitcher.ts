@@ -17,6 +17,14 @@ export class TabSwitcher {
   private _tabContents!: NodeListOf<HTMLElement>;
 
   /**
+   * 現在選択中のタブのインデックス
+   * @returns インデックス
+   */
+  get currentIndex(): number {
+    return this._currentIndex;
+  }
+
+  /**
    * コンストラクタ
    * @param _prefixName
    */

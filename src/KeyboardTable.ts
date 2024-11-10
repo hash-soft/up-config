@@ -39,8 +39,10 @@ export class KeyboardTable extends TableSelector {
    * @param e
    */
   private _onKeyDown(e: KeyboardEvent) {
-    // 割り当て不可なキーな場合追加不可
+    // キーコードを拾えない
+    // もしくは割り当て不可なキーな場合追加不可
     if (
+      !e.code ||
       [
         "Backspace",
         "Tab",
