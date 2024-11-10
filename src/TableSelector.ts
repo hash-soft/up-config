@@ -119,8 +119,9 @@ export class TableSelector {
       "items-center",
       "hover:bg-red-200"
     );
+    const trashSvg = document.getElementById("trash-svg") as HTMLImageElement;
     const removeImg = document.createElement("img");
-    removeImg.src = "src/assets/delete_remove_bin_icon-icons.com_72400.svg";
+    removeImg.src = trashSvg.src;
     removeImg.classList.add("fill-current");
     removeImg.alt = "icon";
     btnRemove.appendChild(removeImg);

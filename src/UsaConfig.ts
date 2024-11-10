@@ -44,3 +44,5 @@ export const defaultConfig: UsaConfig = {
     ["16"],
   ],
 };
+
+export const usaConfigName = "config.json";

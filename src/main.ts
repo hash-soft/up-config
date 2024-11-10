@@ -5,13 +5,13 @@
 import { KeyboardTable } from "./KeyboardTable";
 import { GamepadTable } from "./GamepadTable";
 import { TabSwitcher } from "./TabSwitcher";
-import { defaultConfig, UsaConfig } from "./UsaConfig";
-import { invoke } from "@tauri-apps/api/core";
+import { defaultConfig, UsaConfig, usaConfigName } from "./UsaConfig";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { readTextFile } from "@tauri-apps/plugin-fs";
+import { readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
 import { BaseDirectory } from "@tauri-apps/api/path";
 
 const usaConfig: UsaConfig = { ...defaultConfig };
+const modalId = "modal";
 
 const tabSwitcher = new TabSwitcher("tab");
 const keyboardTable = new KeyboardTable();
@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", async () => {
  */
 const onDomContentLoaded = async () => {
   try {
-    const result = await readTextFile("config.json", {
+    const result = await readTextFile(usaConfigName, {
       baseDir: BaseDirectory.Resource,
     });
     const json = JSON.parse(result) as UsaConfig;
@@ -60,6 +60,9 @@ const onDomContentLoaded = async () => {
   });
   window.addEventListener("focus", onFocus);
   window.addEventListener("blur", onBlur);
+  document.getElementById("modal-close")?.addEventListener("click", () => {
+    toggleModal(modalId);
+  });
 };
 
 /**
@@ -137,21 +140,43 @@ const onBlur = () => {
 };
 
 /**
- * 設定を保存する
+ * 現在の設定をファイルに保存し、ウィンドウを閉じる
+ * 設定をJSON形式の文字列に変換し、フォーマットを調整して保存する。
+ * 保存に失敗した場合はエラーメッセージをコンソールに出力し、モーダルを表示する。
  * @async
- * @returns 保存結果 "success" or "failed"
  */
 const save = async () => {
-  // １行１項目なのでreplacerでまとめたい
-  const configText = JSON.stringify(usaConfig, null, 2);
-  const text = await invoke("save", { configText });
-  if (text === "failed") {
-    // TODO: エラー処理
-    // 画面を出したい
-  } else {
-    // アプリ終了 最後にコメントアウトを取る
-    //await getCurrentWindow().close();
+  const configText = JSON.stringify(usaConfig, null, 2).replace(
+    /\[\s+([^[]*?)\s+\]/gs,
+    (_match, p1) => `[ ${p1.trim().replace(/\s+/g, " ")} ]`
+  );
+
+  try {
+    await writeTextFile(usaConfigName, configText, {
+      baseDir: BaseDirectory.Resource,
+    });
+    await getCurrentWindow().close();
+  } catch (e) {
+    console.error(e);
+    toggleModal("modal-id");
   }
+};
+
+/**
+ * モーダルをトグル表示する
+ * @param {string} modalID - モーダルのid
+ * @description
+ * hiddenとflexクラスをトグルして、モーダルを表示/非表示にする。
+ * また、モーダルのバックドロップも同様にトグルする。
+ * @see https://tailwindcss.com/docs/display-and-visibility
+ */
+const toggleModal = (modalID: string) => {
+  const modal = document.getElementById(modalID);
+  const modalBackdrop = document.getElementById(modalID + "-backdrop");
+  modal?.classList.toggle("hidden");
+  modalBackdrop?.classList.toggle("hidden");
+  modal?.classList.toggle("flex");
+  modalBackdrop?.classList.toggle("flex");
 };
 
 /**
