@@ -64,7 +64,7 @@ export class GamepadTable extends TableSelector {
     if (this._monitoringTimerId) {
       return;
     }
-    this._monitoringTimerId = setInterval(() => {
+    this._monitoringTimerId = window.setInterval(() => {
       this._updatePressedState();
       this._pushData();
     }, 100);

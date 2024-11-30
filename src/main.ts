@@ -11,7 +11,7 @@ import { readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
 import { BaseDirectory } from "@tauri-apps/api/path";
 
 const usaConfig: UsaConfig = { ...defaultConfig };
-const modalId = "modal";
+const baseModalId = "modal";
 
 const tabSwitcher = new TabSwitcher("tab");
 const keyboardTable = new KeyboardTable();
@@ -61,7 +61,7 @@ const onDomContentLoaded = async () => {
   window.addEventListener("focus", onFocus);
   window.addEventListener("blur", onBlur);
   document.getElementById("modal-close")?.addEventListener("click", () => {
-    toggleModal(modalId);
+    toggleModal(baseModalId);
   });
 };
 
@@ -158,7 +158,7 @@ const save = async () => {
     await getCurrentWindow().close();
   } catch (e) {
     console.error(e);
-    toggleModal("modal-id");
+    toggleModal(baseModalId);
   }
 };
 
