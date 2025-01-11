@@ -188,6 +188,22 @@
               </tr>
             </tbody>
           </table>
+          <div class="px-2">
+            <button
+              id="keyboard-all-delete"
+              class="w-[120px] rounded-md bg-red-600 py-1 px-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+              type="button"
+            >
+              全削除
+            </button>
+            <button
+              id="keyboard-default"
+              class="w-[120px] rounded-md bg-gray-600 py-1 px-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-gray-700 focus:shadow-none active:bg-gray-700 hover:bg-gray-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+              type="button"
+            >
+              デフォルト
+            </button>
+          </div>
         </div>
         <div id="" name="tab-content" class="hidden">
           <table class="w-full text-md bg-white shadow-md rounded mb-4">
@@ -196,6 +212,12 @@
                 <th class="text-left p-3 px-5 w-[250px]">操作</th>
                 <th class="text-left p-3 px-5">キー</th>
                 <th class="text-left p-3 px-5"></th>
+              </tr>
+              <!--- 順番を飛ばすのでnameを付けない -->
+              <tr class="border-b hover:bg-blue-100" id="gamepad-axes-row">
+                <td class="p-3 px-5">入力キー</td>
+                <td class="p-3">未入力</td>
+                <td class="p-3 px-5"></td>
               </tr>
               <tr
                 class="border-b hover:bg-blue-300 bg-blue-300"
@@ -264,12 +286,6 @@
                   </div>
                 </td>
               </tr>
-              <!--- 順番を飛ばすのでnameやホバーを付けない -->
-              <tr class="border-b bg-gray-200" id="gamepad-axes-row">
-                <td class="p-3 px-5">アナログキー</td>
-                <td class="p-3 px-5">未入力</td>
-                <td class="p-3 px-5"></td>
-              </tr>
               <tr class="border-b hover:bg-blue-100" name="gamepad-row">
                 <td class="p-3 px-5">上</td>
                 <td class="p-3 px-5">
@@ -336,6 +352,22 @@
               </tr>
             </tbody>
           </table>
+          <div class="px-2">
+            <button
+              id="gamepad-all-delete"
+              class="w-[120px] rounded-md bg-red-600 py-1 px-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+              type="button"
+            >
+              全削除
+            </button>
+            <button
+              id="gamepad-default"
+              class="w-[120px] rounded-md bg-gray-600 py-1 px-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-gray-700 focus:shadow-none active:bg-gray-700 hover:bg-gray-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+              type="button"
+            >
+              デフォルト
+            </button>
+          </div>
         </div>
       </div>
       <div

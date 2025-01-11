@@ -33,16 +33,7 @@ export const defaultConfig: UsaConfig = {
     ["ArrowLeft"],
     ["ArrowRight"],
   ],
-  gamePad: [
-    ["2", "7"],
-    ["3", "5"],
-    ["1", "8"],
-    ["4", "9"],
-    ["13"],
-    ["14"],
-    ["15"],
-    ["16"],
-  ],
+  gamePad: [["2"], ["3"], ["1"], ["4"], ["13"], ["14"], ["15"], ["16"]],
 };
 
 export const usaConfigName = "config.json";

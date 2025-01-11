@@ -3,7 +3,7 @@
  */
 
 import { TableSelector } from "./TableSelector";
-import { KeyMap } from "./UsaConfig";
+import { defaultConfig, KeyMap } from "./UsaConfig";
 
 // アナログキーの方向
 const enum EDirection {
@@ -28,9 +28,13 @@ export class GamepadTable extends TableSelector {
    */
   private _pressedDirection: EDirection = EDirection.Center;
   /**
-   * アナログキーの行
+   * 入力表示行を選択しているか
    */
-  private _axesKeyRows!: HTMLElement;
+  private _inputDisplayRow: boolean = false;
+  /**
+   * 入力表示キーの行
+   */
+  private _displayInputKeyRows!: HTMLElement;
   /**
    * アナログキー方向の名前
    */
@@ -54,7 +58,66 @@ export class GamepadTable extends TableSelector {
    */
   override setup(data: Readonly<KeyMap>) {
     super.setup(data);
-    this._axesKeyRows = document.getElementById("gamepad-axes-row")!;
+    this._displayInputKeyRows = document.getElementById("gamepad-axes-row")!;
+    this._changeTableRowIndex(-1);
+    this._inputDisplayRow = true;
+    this._selectRow(this._displayInputKeyRows);
+    this._displayInputKeyRows.addEventListener("click", (event) => {
+      this._onInputDisplayRowClick(event);
+    });
+    this._setButtonListener();
+  }
+
+  /**
+   * 入力表示の行をクリックした時
+   * @param _e イベント
+   * @private
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private _onInputDisplayRowClick(_e: Event) {
+    if (this._inputDisplayRow) {
+      return;
+    }
+    this._changeTableRowIndex(-1);
+  }
+
+  /**
+   * ゲームパッドの全削除ボタンとデフォルトボタンにイベントを設定
+   * @private
+   */
+  private _setButtonListener() {
+    const allDeleteButton = document.getElementById("gamepad-all-delete");
+    allDeleteButton?.addEventListener("click", () => {
+      super.deleteKeyMap();
+      super.resetTable();
+    });
+    const defaultButton = document.getElementById("gamepad-default");
+    defaultButton?.addEventListener("click", () => {
+      super.setKeyMap(defaultConfig.gamePad);
+      super.resetTable();
+    });
+  }
+
+  /**
+   * @inheritdoc
+   * @override
+   * @param index 新しい行のインデックス
+   *
+   * テーブル行のインデックスを変更する
+   *
+   * 現在の行のスタイルを初期化し、新しい行にスタイルを適用する
+   *
+   * 入力表示の行を選択/非選択も行う
+   */
+  protected override _changeTableRowIndex(index: number) {
+    super._changeTableRowIndex(index);
+    if (index < 0) {
+      this._selectRow(this._displayInputKeyRows);
+      this._inputDisplayRow = true;
+    } else {
+      this._unselectRow(this._displayInputKeyRows);
+      this._inputDisplayRow = false;
+    }
   }
 
   /**
@@ -91,9 +154,11 @@ export class GamepadTable extends TableSelector {
         continue;
       }
       this._updatePressedButton(gamepad.buttons);
-      this._pushData();
-      if (this._updatePressedAxes(gamepad.axes)) {
-        this._viewAxes();
+      if (this._inputDisplayRow) {
+        this._updatePressedAxes(gamepad.axes);
+        this._displayInputKey();
+      } else {
+        this._pushData();
       }
     }
   }
@@ -159,11 +224,38 @@ export class GamepadTable extends TableSelector {
   }
 
   /**
+   * 現在押されているボタンもしくはアナログキーの状態をHTML上に反映する
+   * @private
+   */
+  private _displayInputKey() {
+    if (this._displayButton()) {
+      return;
+    }
+    this._displayAxes();
+  }
+
+  /**
+   * ゲームパッドのボタンの状態をHTML上に反映する
+   * @returns ボタンが押されていたらtrueを返す
+   * @private
+   */
+  private _displayButton() {
+    const index = this._pressedButton.indexOf(true);
+    if (index < 0) {
+      return false;
+    } else {
+      this._displayInputKeyRows.children[1].textContent =
+        "button" + (index + 1);
+    }
+    return true;
+  }
+
+  /**
    * ゲームパッドのアナログキーの方向をHTML上に反映する
    * @private
    */
-  private _viewAxes() {
-    this._axesKeyRows.children[1].textContent =
+  private _displayAxes() {
+    this._displayInputKeyRows.children[1].textContent =
       GamepadTable._DirectionName[this._pressedDirection];
   }
 }

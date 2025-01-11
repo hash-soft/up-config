@@ -10,7 +10,7 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
 import { BaseDirectory } from "@tauri-apps/api/path";
 
-const usaConfig: UsaConfig = { ...defaultConfig };
+const usaConfig: UsaConfig = structuredClone(defaultConfig);
 const baseModalId = "modal";
 
 const tabSwitcher = new TabSwitcher("tab");
@@ -51,8 +51,8 @@ const onDomContentLoaded = async () => {
   gamepadTable.setup(usaConfig.gamePad);
   setGamepadObserver();
   document.getElementById("save")?.addEventListener("click", () => {
-    usaConfig.keyboard = [...keyboardTable.data];
-    usaConfig.gamePad = [...gamepadTable.data];
+    usaConfig.keyboard = keyboardTable.data.map((value) => [...value]);
+    usaConfig.gamePad = gamepadTable.data.map((value) => [...value]);
     save();
   });
   document.getElementById("cancel")?.addEventListener("click", () => {

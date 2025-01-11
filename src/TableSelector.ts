@@ -45,7 +45,7 @@ export class TableSelector {
    * 使用準備
    */
   setup(data: Readonly<KeyMap>) {
-    this._data = [...data];
+    this.setKeyMap(data);
     this._tableRows = document.getElementsByName(this._prefixName + "-row");
     this._tableRows.forEach((row, index) => {
       row.addEventListener("click", (event) => {
@@ -59,6 +59,23 @@ export class TableSelector {
       });
     });
     this.resetTable();
+  }
+
+  /**
+   * キーの設定を全て削除
+   */
+  deleteKeyMap() {
+    for (let i = 0; i < this._data.length; i++) {
+      this._data[i] = [];
+    }
+  }
+
+  /**
+   * キーマップを設定
+   * @param data キーマップのデータ
+   */
+  setKeyMap(data: Readonly<KeyMap>) {
+    this._data = data.map((value) => [...value]);
   }
 
   /**
@@ -175,17 +192,42 @@ export class TableSelector {
    * @param index
    */
   private _onTableRowClick(_e: Event, index: number) {
+    this._changeTableRowIndex(index);
+  }
+
+  /**
+   * テーブル行のインデックスを変更する
+   *
+   * 現在の行のスタイルを初期化し、新しい行にスタイルを適用する。
+   *
+   * @param index 新しい行のインデックス
+   */
+  protected _changeTableRowIndex(index: number) {
     // observer誤判定防止のためremove ⇒ add の順に実行する
-    this._tableRows[this._currentIndex].classList.remove(
-      this._style.bg,
-      this._style.activeHover
-    );
-    this._tableRows[this._currentIndex].classList.add(this._style.hover);
-    this._tableRows[index].classList.add(
-      this._style.bg,
-      this._style.activeHover
-    );
+    if (this._currentIndex >= 0) {
+      this._unselectRow(this._tableRows[this._currentIndex]);
+    }
+    if (index >= 0) {
+      this._selectRow(this._tableRows[index]);
+    }
     this._currentIndex = index;
+  }
+
+  /**
+   * 選択行のスタイルを適用する
+   * @param element 選択行のHTMLElement
+   */
+  protected _selectRow(element: HTMLElement) {
+    element.classList.add(this._style.bg, this._style.activeHover);
+  }
+
+  /**
+   * 非選択行のスタイルを適用する
+   * @param element 非選択行のHTMLElement
+   */
+  protected _unselectRow(element: HTMLElement) {
+    element.classList.remove(this._style.bg, this._style.activeHover);
+    element.classList.add(this._style.hover);
   }
 
   /**
